@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Brick &amp; Batten — Virtual Exterior Design</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-row">
+      <a href="#home" class="brand">Brick &amp; Batten</a>
+     <div class="nav-wrapper">
+  <nav class="main-nav" id="mainNav">
+    <a href="#home" class="nav-link">Home</a>
+    <a href="#before-after" class="nav-link">Before/After</a>
+    <a href="#services" class="nav-link">Services</a>
+    <a href="#projects" class="nav-link">Projects</a>
+    <a href="#store" class="nav-link">Store</a>
+    <a href="#contact" class="nav-link cta">Contact</a>
+  </nav>
+  <button id="openCartBtn" class="icon-btn" aria-label="Cart">
+    🛒 <span id="cartCount">0</span>
+  </button>
+</div>
+
+<button id="mobileToggle" class="icon-btn mobile-only" aria-label="menu">☰</button>
+
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+   <section id="home" class="hero">
+  <div class="hero-slideshow">
+    <div class="slide active" style="background-image:url('photos1.jpg')"></div>
+    <div class="slide" style="background-image:url('photos2.jpg')"></div>
+    <div class="slide" style="background-image:url('photos3.jpg')"></div>
+    <div class="slide" style="background-image:url('photos4.jpg')"></div>
+  </div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-inner container">
+    <h1 class="hero-title">Transform Your Outdoor Spaces</h1>
+    <p class="hero-lead">Bring your dream home to life with stunning exterior designs, personalized lighting, and luxurious outdoor retreats.</p>
+    <div class="hero-cta">
+      <a href="#store" class="btn primary">Shop the Look</a>
+    </div>
+  </div>
+</section>
+
+
+    <!-- BEFORE / AFTER-->
+    <section id="before-after" class="section before-after">
+    <div class="container">
+      <h2 class="section-title">Before & After Gallery</h2>
+
+      <div data-bfa="carousel">
+        <!-- Slide 1 -->
+        <div data-bfa="slide" class="is-active">
+          <div data-bfa="before" style="background-image:url('image2.jpg')">
+            <span data-bfa="label-left">Before</span>
+          </div>
+          <div data-bfa="after" style="background-image:url('image1.jpeg')"></div>
+          <div data-bfa="handle"></div>
+          <span data-bfa="label-right">After</span>
+          <div data-bfa="view-controls">
+            <button data-bfa="to-before">See Before</button>
+            <button data-bfa="to-after">See After</button>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div data-bfa="slide">
+          <div data-bfa="before" style="background-image:url('image3.jpg')">
+            <span data-bfa="label-left">Before</span>
+          </div>
+          <div data-bfa="after" style="background-image:url('image4.jpg')"></div>
+          <div data-bfa="handle"></div>
+          <span data-bfa="label-right">After</span>
+          <div data-bfa="view-controls">
+            <button data-bfa="to-before">See Before</button>
+            <button data-bfa="to-after">See After</button>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div data-bfa="slide">
+          <div data-bfa="before" style="background-image:url('image6.png')">
+            <span data-bfa="label-left">Before</span>
+          </div>
+          <div data-bfa="after" style="background-image:url('image5.jpg')"></div>
+          <div data-bfa="handle"></div>
+          <span data-bfa="label-right">After</span>
+          <div data-bfa="view-controls">
+            <button data-bfa="to-before">See Before</button>
+            <button data-bfa="to-after">See After</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+        <div data-bfa="slide">
+          <div data-bfa="before" style="background-image:url('image10.jpg')">
+            <span data-bfa="label-left">Before</span>
+          </div>
+          <div data-bfa="after" style="background-image:url('image9.jpg')"></div>
+          <div data-bfa="handle"></div>
+          <span data-bfa="label-right">After</span>
+          <div data-bfa="view-controls">
+            <button data-bfa="to-before">See Before</button>
+            <button data-bfa="to-after">See After</button>
+          </div>
+        </div>
+      </div>
+
+      <div data-bfa="controls">
+        <button id="bfaPrev" class="btn">◀ Previous</button>
+        <button id="bfaNext" class="btn">Next ▶</button>
+      </div>
+
+      <!-- Progress indicator -->
+      <div data-bfa="progress" class="progress-dots"></div>
+    </div>
+</section> 
+
+<!-- SERVICES -->
+    <!-- SERVICES -->
+<section id="services" class="section services">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-sub">Design-first solutions to visualize, plan and shop your exterior.</p>
+    </div>
+    <div class="services-grid">
+      
+      <!-- Photo-Real Mockups -->
+      <article class="service-card" data-tilt>
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop" alt="Mockups">
+        <div class="service-body">
+          <h3>Photo-Real Mockups</h3>
+          <p>See your home’s new look before making changes. High-fidelity renderings help you decide with confidence.</p>
+        </div>
+      </article>
+
+      <!-- Color Consultation -->
+      <article class="service-card" data-tilt>
+        <img src="https://images.unsplash.com/photo-1501877008226-4fca48ee50c1?q=80&w=1200&auto=format&fit=crop" alt="Color Consultation">
+        <div class="service-body">
+          <h3>Custom Color Consultation</h3>
+          <p>Expertly chosen palettes that enhance your architecture and neighborhood style.</p>
+        </div>
+      </article>
+
+      <!-- Lighting Plans -->
+      <article class="service-card" data-tilt>
+       <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+     alt="Exterior Lighting Plans" />
+        <div class="service-body">
+          <h3>Exterior Lighting Plans</h3>
+          <p>Layered lighting strategies that highlight materials, improve safety, and add curb appeal.</p>
+        </div>
+      </article>
+
+      <!-- Materials -->
+      <article class="service-card" data-tilt>
+        <img src="https://images.pexels.com/photos/29580127/pexels-photo-29580127.jpeg?auto=compress&cs=tinysrgb&w=1200" 
+     alt="Material & Finish Guidance" />
+        <div class="service-body">
+          <h3>Material & Finish Guidance</h3>
+          <p>From siding to stone, we recommend the right textures and finishes for a timeless look.</p>
+        </div>
+      </article>
+
+      <!-- Shopping List -->
+      <article class="service-card" data-tilt>
+        <img src="https://images.pexels.com/photos/15491800/pexels-photo-15491800.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Shopping List">
+        <div class="service-body">
+          <h3>Clickable Shopping List</h3>
+          <p>Every design comes with direct links to purchase the exact products used in your mockup.</p>
+        </div>
+      </article>
+
+      <!-- Outdoor Living Spaces -->
+      <article class="service-card" data-tilt>
+        <img src="service1.webp" alt="Outdoor Living Spaces" />
+        <div class="service-body">
+          <h3>Outdoor Living Spaces</h3>
+          <p>Create luxurious outdoor lounges and poolside retreats that extend your home’s comfort into nature.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section projects">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Featured Transformations</h2>
+      <p class="section-sub">Selected projects and concept studies.</p>
+    </div>
+    <div class="projects-grid" id="projectsGrid">
+      
+      <figure class="project">
+        <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=1400" alt="Project 1">
+        <figcaption><strong>Cozy Stone Facade</strong><span>Trim, paint & hardware</span></figcaption>
+      </figure>
+
+      <figure class="project">
+        <img src="https://images.unsplash.com/photo-1502003148287-a82ef80a6abc?q=80&w=1400" alt="Project 2">
+        <figcaption><strong>Modern Minimal</strong><span>Clean lines & matte finishes</span></figcaption>
+      </figure>
+
+      <figure class="project">
+        <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1400" alt="Project 3">
+        <figcaption><strong>Evening Lighting</strong><span>Warm washes & accents</span></figcaption>
+      </figure>
+
+      <!-- New Project 4 -->
+      <figure class="project">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1400" alt="Project 4">
+        <figcaption><strong>Rustic Charm</strong><span>Natural textures & wood accents</span></figcaption>
+      </figure>
+
+      <!-- New Project 5 -->
+      <figure class="project">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1400" alt="Project 5">
+        <figcaption><strong>Urban Contemporary</strong><span>Sleek glass & clean lines</span></figcaption>
+      </figure>
+
+      <!-- New Project 6 -->
+      <figure class="project">
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1400" alt="Project 6">
+        <figcaption><strong>Classic Revival</strong><span>Elegant stone & balanced design</span></figcaption>
+      </figure>
+
+      <!-- New Project 7 -->
+      <figure class="project">
+        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=1400" alt="Project 5">
+        <figcaption><strong>Urban Contemporary</strong><span>Dark wood & glass accents</span></figcaption>
+      </figure>
+
+      <!-- New Project 8 -->
+        <figure class="project">
+          <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=1400" alt="Project 8">
+          <figcaption><strong>Luxury Villa</strong><span>Modern design with warm lighting</span></figcaption>
+        </figure>
+    </div>
+  </div>
+</section>
+
+
+    <!-- STORE -->
+    <section id="store" class="section store">
+      <div class="store-hero">
+        <video class="store-video" autoplay muted loop playsinline>
+          <source src="https://cdn.coverr.co/videos/coverr-a-modern-kitchen-4452/1080p.mp4" type="video/mp4">
+        </video>
+        <div class="store-overlay"></div>
+        <div class="container store-head">
+          <h2 class="section-title">Shop the Look</h2>
+          <p class="section-sub">Curated pieces used in our mockups — hardware, lighting & decor.</p>
+        </div>
+      </div>
+
+      <div class="container">
+  <!-- Custom slider -->
+  <div class="store-carousel">
+    <button class="store-prev">◀</button>
+    <div id="productSlider" class="product-slider"></div>
+    <button class="store-next">▶</button>
+  </div>
+</div>
+
+</section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="section testimonials">
+  <div class="container">
+    <h2 class="section-title">What Clients Say</h2>
+    <div class="quotes" id="quotes">
+      <blockquote class="quote active">
+        <p>“The renderings made choosing colors effortless.”</p>
+        <footer>
+          <img src="https://i.pravatar.cc/80?img=32" alt="Client photo">
+          <span>— Sarah J.</span>
+        </footer>
+      </blockquote>
+      <blockquote class="quote">
+        <p>“An entirely new facade with zero guesswork.”</p>
+        <footer>
+          <img src="https://i.pravatar.cc/80?img=56" alt="Client photo">
+          <span>— Daniel K.</span>
+        </footer>
+      </blockquote>
+      <blockquote class="quote">
+        <p>“Made our house feel brand new without the mess.”</p>
+        <footer>
+          <img src="https://i.pravatar.cc/80?img=12" alt="Client photo">
+          <span>— Priya R.</span>
+        </footer>
+      </blockquote>
+    </div>
+    <div class="testimonial-dots" id="testimonialDots"></div>
+  </div>
+</section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact">
+      <div class="container">
+        <div class="contact-wrap">
+          <div class="contact-info">
+            <h2 class="section-title">Start your virtual design</h2>
+            <p class="section-sub">Send a photo and a few preferences — we’ll return a polished concept and shopping list.</p>
+            <ul class="contact-list">
+              <li><strong>Email:</strong> iimohtasimd92@gmail.com</li>
+              <li><strong>Phone:</strong> 6201489756</li>
+              <li><strong>Service area:</strong> INDIA (remote consultations available)</li>
+            </ul>
+          </div>
+
+          <form id="contactForm" class="contact-form" novalidate>
+            <div class="form-row">
+              <input id="cf-name" name="name" type="text" placeholder="Name" required>
+              <input id="cf-email" name="email" type="email" placeholder="Email" required>
+            </div>
+            <input id="cf-phone" name="phone" type="text" placeholder="Phone (optional)">
+            <textarea id="cf-notes" name="notes" rows="6" placeholder="Tell us about the project (photos optional)"></textarea>
+
+            <div class="form-actions">
+              <button type="submit" class="btn primary">Request a proposal</button>
+              <button type="reset" class="btn ghost">Reset</button>
+            </div>
+            <div id="formStatus" class="form-status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="brand">Brick &amp; Batten</div>
+      <div class="copy">© <span id="year"></span> Brick &amp; Batten — Demo</div>
+      <div class="links"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button id="closeCartBtn" class="icon-btn" aria-label="Close cart">✕</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-summary">
+        <div>Subtotal</div>
+        <div id="cartSubtotal">₹0</div>
+      </div>
+      <div class="cart-actions">
+        <button id="payNowBtn" class="btn success">Pay Now</button>
+        <button id="clearCartBtn" class="btn ghost">Clear</button>
+      </div>
+    </div>
+  </aside>
+  <div id="cartBackdrop" class="cart-backdrop" hidden></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
