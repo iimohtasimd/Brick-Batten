@@ -5,17 +5,17 @@ const formatINR = n => '₹' + n.toLocaleString('en-IN');
 
 /* ===== Product catalog (12 items) - prices in INR ===== */
 const PRODUCTS = [
-  { id: 1, title: "MATTE BLACK CENTURY EXTERIOR LEVER WITH DEADBOLT ENTRY SET", price: 2436, image: "first.jpeg" },
-  { id: 2, title: "AGED BRONZE MISSION DOOR", price: 6636, image: "second.jpeg" },
+  { id: 1, title: "MATTE BLACK CENTURY EXTERIOR LEVER WITH DEADBOLT ENTRY SET", price: 2436, image: "first.jpeg",category:"accessories" },
+  { id: 2, title: "AGED BRONZE MISSION DOOR", price: 6636, image: "second.jpeg",category:"accessories" },
   { id: 3, title: "Modern AVALOON DOOR KNOCKER", price: 12516, image: "third.jpeg" },
   { id: 4, title: "ACORN SMOOTH S SHUTTER HOLDBACK", price: 3276, image: "fouth.jpeg" },
   { id: 5, title: "NEUTRA HOUSE NUMBER", price: 9144, image: "5th.jpeg" },
-  { id: 6, title: "WELCOME HOME YARD SIGN", price: 2100, image: "sixth.jpeg" },
+  { id: 6, title: "WELCOME HOME YARD SIGN", price: 2100, image: "sixth.jpeg",category:"planters" },
   { id: 7, title: "MALONE POST-MOUNTED MAILBOX OPTIONAL POLE", price: 7476, image: "seventh.jpeg" },
   { id: 8, title: "CUBBY WALL-MOUNTED MAILBOX", price: 1596, image: "8th.jpeg" },
-  { id: 9, title: "MODERN OBELISK MEDIUM SCONCE", price: 8320, image: "9th.jpeg" },
+  { id: 9, title: "MODERN OBELISK MEDIUM SCONCE", price: 8320, image: "9th.jpeg",category:"lighting" },
   { id: 10, title: "LAKEIEW ELYSIAN 36-INCH ROUND PROPANE FIRE TABLE", price: 2800, image: "10th.png" },
-  { id: 11, title: "HULA SIDE TABLE", price: 6200, image: "11th.jpeg" },
+  { id: 11, title: "HULA SIDE TABLE", price: 6200, image: "11th.jpeg",category:"leisure" },
   { id: 12, title: "HANGING RATTAN BENCH", price: 5200, image: "12th.png" },
   { id: 13, title: "PVC CELLING PANEL PIECE", price: 120, image: "13th.jpg" },
   { id: 14, title: "VOX PVC CELLING", price: 300, image: "14th.webp" },
@@ -25,72 +25,114 @@ const PRODUCTS = [
   { id: 18, title: "MODERN LED PENDANT LIGHT FIXTURE", price: 45955, image: "modern chandalier lkjjl.jpg" },
   { id: 19, title: "CASCADING RING LED PENDANT CHANDALIER", price: 55000, image: "chandalier.webp" },
   { id: 20, title: "MODERN OUTDOOR PATIO GARDEN RATTAN", price: 7500, image: "modernoutdoorpatiogardenRattan.jpg" },
-
 ];
 
 /* ===== Cart (persisted) ===== */
 let CART = JSON.parse(localStorage.getItem('bb_cart_v2') || '[]');
-
 function saveCart(){ localStorage.setItem('bb_cart_v2', JSON.stringify(CART)); }
 
 /* ===== Render product grid into #productGrid ===== */
-function renderProducts(){
-  const grid = document.getElementById('productSlider');
-  grid.innerHTML = '';
-  PRODUCTS.forEach(p => {
-    const card = document.createElement('div');
-    card.className = 'product';
+const PRODUCTS_PER_PAGE = 8;
+let currentPage = 1;
+
+function renderProducts(filter = "all", sort = "default", page = 1) {
+  const container = document.getElementById("product-container");
+  const pagination = document.getElementById("pagination");
+  container.innerHTML = "";
+  if (pagination) pagination.innerHTML = "";
+
+  let items = [...PRODUCTS];
+
+  // Filter
+  if (filter !== "all") items = items.filter(p => p.category === filter);
+
+  // Sort
+  if (sort === "low-high") items.sort((a, b) => a.price - b.price);
+  else if (sort === "high-low") items.sort((a, b) => b.price - a.price);
+  else if (sort === "az") items.sort((a, b) => a.title.localeCompare(b.title));
+  else if (sort === "za") items.sort((a, b) => b.title.localeCompare(a.title));
+
+  // Pagination
+ const start = (page - 1) * PRODUCTS_PER_PAGE;
+ const paginated = items.slice(start, start + PRODUCTS_PER_PAGE);
+
+  // Display products
+  container.classList.add("product-grid");
+  paginated.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "product-card";
     card.innerHTML = `
-      <img src="${p.image}" alt="${escape(p.title)}">
-      <div class="product-info">
-        <strong>${escape(p.title)}</strong>
-        <span>${formatINR(p.price)}</span>
-      </div>
-      <button class="btn-product" data-id="${p.id}">Add to Cart</button>
+      <img src="${p.image}" alt="${p.title}">
+      <div class="brand">PERIGOLD</div>
+      <div class="name">${p.title}</div>
+      <div class="price">${formatINR(p.price)}</div>
+      <button class="btn-product" onclick="addToCart(${p.id})">Add to Cart</button>
     `;
-    grid.appendChild(card);
+    container.appendChild(card);
   });
+
+  // Pagination buttons
+  if (pagination) {
+    const totalPages = Math.ceil(items.length / PRODUCTS_PER_PAGE);
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement("button");
+      btn.textContent = i;
+      btn.className = "page-btn";
+      if (i === page) btn.classList.add("active");
+      btn.addEventListener("click", () => {
+        currentPage = i;
+        renderProducts(filter, sort, i);
+        window.scrollTo({ top: container.offsetTop - 100, behavior: "smooth" });
+      });
+      pagination.appendChild(btn);
+    }
+  }
+  // ✅ Rebind global addToCart for new buttons
+  window.addToCart = addToCart;
+}
+
 
   // hook add-to-cart
-  $$('.btn-product').forEach(b => b.addEventListener('click', (e)=>{
-    const id = parseInt(e.currentTarget.dataset.id,10);
-    addToCart(id);
-  }));
-}
+// function initProductSlider(){
+//   const slider = document.getElementById('productSlider');
+//   const nextBtn = document.querySelector('.store-next');
+//   const prevBtn = document.querySelector('.store-prev');
 
-function initProductSlider(){
-  const slider = document.getElementById('productSlider');
-  const nextBtn = document.querySelector('.store-next');
-  const prevBtn = document.querySelector('.store-prev');
+//   nextBtn.addEventListener('click', () => {
+//     slider.scrollBy({ left: 300, behavior: 'smooth' });
+//   });
 
-  nextBtn.addEventListener('click', () => {
-    slider.scrollBy({ left: 300, behavior: 'smooth' });
-  });
-
-  prevBtn.addEventListener('click', () => {
-    slider.scrollBy({ left: -300, behavior: 'smooth' });
-  });
-}
+//   prevBtn.addEventListener('click', () => {
+//     slider.scrollBy({ left: -300, behavior: 'smooth' });
+//   });
+// }
 
 /* ===== Add to cart logic ===== */
-function addToCart(id){
-  const p = PRODUCTS.find(x=>x.id===id);
-  if(!p) return;
-  const existing = CART.find(i => i.id === id);
-  if(existing) existing.qty++;
+function addToCart(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  const existing = CART.find(item => item.id === id);
+  if (existing) existing.qty++;
   else CART.push({ id:p.id, title:p.title, price:p.price, image:p.image, qty:1 });
+
   saveCart();
   renderCart();
-  showToast(`Added "${p.title}" to cart`);
   updateCartCount();
+  showToast(`Added "${p.title}" to cart`);
   openCart();
 }
+
 
 /* ===== Render cart drawer ===== */
 function renderCart(){
   const container = $('#cartItems');
   container.innerHTML = '';
-  if(CART.length === 0){ container.innerHTML = '<p class="muted">Your cart is empty.</p>'; $('#cartSubtotal').textContent = formatINR(0); return; }
+  if(CART.length === 0){
+    container.innerHTML = '<p class="muted">Your cart is empty.</p>';
+    $('#cartSubtotal').textContent = formatINR(0);
+    return;
+  }
+
   let subtotal = 0;
   CART.forEach(item => {
     subtotal += item.price * item.qty;
@@ -100,29 +142,26 @@ function renderCart(){
       <img src="${item.image}" alt="${escape(item.title)}">
       <div style="flex:1">
         <div style="font-weight:700">${escape(item.title)}</div>
-        <div class="muted">₹${item.price.toLocaleString('en-IN')} × 
+        <div class="muted">${formatINR(item.price)} × 
           <input type="number" class="qty-input" data-id="${item.id}" value="${item.qty}" min="1" style="width:56px">
         </div>
       </div>
       <div style="text-align:right">
         <div style="font-weight:700">${formatINR(item.price * item.qty)}</div>
         <button class="btn ghost remove-item" data-id="${item.id}">Remove</button>
-      </div>
-    `;
+      </div>`;
     container.appendChild(el);
   });
 
-  // qty handlers
-  $$('.qty-input').forEach(inp => inp.addEventListener('change', (e)=>{
-    const id = parseInt(e.currentTarget.dataset.id,10);
-    const val = Math.max(1, parseInt(e.currentTarget.value,10) || 1);
+  $$('.qty-input').forEach(inp => inp.addEventListener('change', e=>{
+    const id = +e.currentTarget.dataset.id;
+    const val = Math.max(1, +e.currentTarget.value || 1);
     const it = CART.find(c=>c.id===id);
     if(it){ it.qty = val; saveCart(); renderCart(); updateCartCount(); }
   }));
 
-  // remove handlers
-  $$('.remove-item').forEach(b => b.addEventListener('click', (e)=>{
-    const id = parseInt(e.currentTarget.dataset.id,10);
+  $$('.remove-item').forEach(b => b.addEventListener('click', e=>{
+    const id = +e.currentTarget.dataset.id;
     CART = CART.filter(c => c.id !== id);
     saveCart(); renderCart(); updateCartCount();
   }));
@@ -134,29 +173,63 @@ function renderCart(){
 function openCart(){
   const drawer = $('#cartDrawer');
   const backdrop = $('#cartBackdrop');
-  drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false');
-  backdrop.classList.add('show'); backdrop.hidden = false;
+  drawer.classList.add('open');
+  backdrop.classList.add('show');
+  backdrop.hidden = false;
 }
 function closeCart(){
   const drawer = $('#cartDrawer');
   const backdrop = $('#cartBackdrop');
-  drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true');
-  backdrop.classList.remove('show'); backdrop.hidden = true;
+  drawer.classList.remove('open');
+  backdrop.classList.remove('show');
+  backdrop.hidden = true;
 }
 function updateCartCount(){
-  const count = CART.reduce((s,i)=> s + i.qty, 0);
-  $('#cartCount').textContent = count;
+  $('#cartCount').textContent = CART.reduce((s,i)=>s+i.qty,0);
 }
 
 /* ===== Small UI pieces ===== */
 function showToast(msg){
-  const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg;
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
   document.body.appendChild(t);
-  setTimeout(()=> t.classList.add('visible'), 10);
-  setTimeout(()=> { t.classList.remove('visible'); setTimeout(()=> t.remove(), 300); }, 2600);
+  setTimeout(()=>t.classList.add('visible'),10);
+  setTimeout(()=>{t.classList.remove('visible');setTimeout(()=>t.remove(),300);},2600);
 }
-function escape(s){ return (s+'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function escape(s){return (s+'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
+
+document.addEventListener('DOMContentLoaded', ()=>{
+renderProducts(); renderCart(); updateCartCount();
+
+// Category Filter
+  $$('input[name="category"]').forEach(radio=>{
+    radio.addEventListener('change',()=>{
+      const category = $('input[name="category"]:checked').value;
+      const sort = $('#sort').value;
+      currentPage=1;
+      renderProducts(category, sort, currentPage);
+    });
+  });
+
+
+   // Sorting
+  $('#sort').addEventListener('change',()=>{
+    const category = $('input[name="category"]:checked').value;
+    const sort = $('#sort').value;
+    renderProducts(category, sort);
+  });
+
+   // Cart open/close
+  $('#openCartBtn')?.addEventListener('click', ()=>{
+    const drawer = $('#cartDrawer');
+    drawer.classList.contains('open') ? closeCart() : openCart();
+  });
+  $('#closeCartBtn')?.addEventListener('click', closeCart);
+  $('#cartBackdrop')?.addEventListener('click', closeCart);
+
+// ================================================================================
 /* ===== Before/After initializer ===== */
 function initBeforeAfter(){
   const wrap = $('#baWrap'), after = $('#baAfter'), handle = $('#baHandle');
@@ -257,30 +330,61 @@ function initContactForm(){
 }
 
 /* ===== Init everything ===== */
-document.addEventListener('DOMContentLoaded', ()=>{
-  document.getElementById('year').textContent = new Date().getFullYear();
-  renderProducts(); renderCart(); updateCartCount();
-  initHero(); initBeforeAfter(); initTilt(); initTestimonials(); initScrollSpy(); initMobileNav(); initContactForm(); initProductSlider();
+// document.addEventListener('DOMContentLoaded', ()=>{
+//   // document.getElementById('year').textContent = new Date().getFullYear();
+//   renderProducts(); renderCart(); updateCartCount();
+//   initHero(); initBeforeAfter(); initTilt(); initTestimonials(); initScrollSpy(); initMobileNav(); initContactForm(); initProductSlider();
+//   // Category filter events
+// $$('input[name="category"]').forEach(radio => {
+//   radio.addEventListener('change', () => {
+//     const category = document.querySelector('input[name="category"]:checked').value;
+//     const sort = document.getElementById('sort').value;
+//     currentPage = 1;
+//     renderProducts(category, sort, currentPage);
+//   });
+// });
 
-  // cart open/close handlers
-  $('#openCartBtn').addEventListener('click', openCart);
-  $('#closeCartBtn').addEventListener('click', closeCart);
-  $('#cartBackdrop')?.addEventListener('click', closeCart);
+// Sorting dropdown events
+
+// document.getElementById('sort').addEventListener('change', () => {
+//   const category = document.querySelector('input[name="category"]:checked').value;
+//   const sort = document.getElementById('sort').value;
+//   renderProducts(category, sort);
+// });
+
+
+
 // Pay Now handler (mock payment)
-$('#payNowBtn')?.addEventListener('click', ()=> {
-  if (CART.length === 0) {
-    alert('Your cart is empty!');
-    return;
-  }
-  const total = CART.reduce((sum, i) => sum + i.price * i.qty, 0);
-  alert(`✅ Payment Successful!\nAmount Charged: ${formatINR(total)}\n(Here you can integrate Stripe/PayPal)`);
-  CART = [];
-  saveCart();
-  renderCart();
-  updateCartCount();
-  closeCart();
+$('#payNowBtn')?.addEventListener('click', ()=>{
+    if (CART.length === 0) return showToast('Your cart is empty!');
+    const total = CART.reduce((s,i)=>s+i.price*i.qty,0);
+    const modal = document.createElement('div');
+    modal.className = 'qr-modal';
+    modal.innerHTML = `
+      <div class="qr-card">
+        <h3>Scan & Pay</h3>
+        <p>Amount: <strong>${formatINR(total)}</strong></p>
+        <img src="qr.jpg" alt="QR Code" class="qr-img">
+        <div class="qr-actions">
+          <button id="closeQr" class="btn ghost">Cancel</button>
+          <button id="confirmQr" class="btn success">I’ve Paid</button>
+        </div>
+      </div>`;
+    document.body.appendChild(modal);
+
+    $('#closeQr').addEventListener('click',()=>modal.remove());
+    $('#confirmQr').addEventListener('click',()=>{
+      modal.remove();
+      CART=[];
+      saveCart();
+      renderCart();
+      updateCartCount();
+      closeCart();
+      showToast('✅ Payment Successful!');
+    });
+  });
 });
-});
+
 
 // contact
 
@@ -571,3 +675,4 @@ function initAboutSlider(){
 document.addEventListener('DOMContentLoaded', ()=>{
   initAboutSlider();
 });
+

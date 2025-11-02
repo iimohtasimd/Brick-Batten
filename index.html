@@ -26,7 +26,6 @@
 </div>
 
 <button id="mobileToggle" class="icon-btn mobile-only" aria-label="menu">☰</button>
-
     </div>
   </header>
 
@@ -251,30 +250,45 @@
   </div>
 </section>
 
+<section class="shop-banner">
+  <div class="shop-banner-content">
+    <h2>Shop the Look</h2>
+    <p>Curated pieces used in our mockups — hardware, lighting & decor.</p>
+  </div>
+</section>
 
     <!-- STORE -->
-    <section id="store" class="section store">
-      <div class="store-hero">
-        <video class="store-video" autoplay muted loop playsinline>
-          <source src="https://cdn.coverr.co/videos/coverr-a-modern-kitchen-4452/1080p.mp4" type="video/mp4">
-        </video>
-        <div class="store-overlay"></div>
-        <div class="container store-head">
-          <h2 class="section-title">Shop the Look</h2>
-          <p class="section-sub">Curated pieces used in our mockups — hardware, lighting & decor.</p>
-        </div>
+   <section id="store" class="store-section">
+  <div class="store-container">
+    <!-- Sidebar Filter -->
+    <aside class="store-filter">
+      <h2>Category</h2>
+      <ul>
+        <li><label><input type="radio" name="category" value="all" checked> Show All</label></li>
+        <li><label><input type="radio" name="category" value="leisure"> Leisure</label></li>
+        <li><label><input type="radio" name="category" value="accessories"> Accessories & Decor</label></li>
+        <li><label><input type="radio" name="category" value="garden"> Planters & Garden</label></li>
+        <li><label><input type="radio" name="category" value="lighting"> Lighting</label></li>
+      </ul>
+
+      <div class="sort-dropdown">
+        <select id="sort">
+          <option value="default">Default sorting</option>
+          <option value="price-low-high">Sort by price: low to high</option>
+          <option value="price-high-low">Sort by price: high to low</option>
+        </select>
       </div>
+    </aside>
 
-      <div class="container">
-  <!-- Custom slider -->
-  <div class="store-carousel">
-    <button class="store-prev">◀</button>
-    <div id="productSlider" class="product-slider"></div>
-    <button class="store-next">▶</button>
+    <!-- Product Grid -->
+    <div class="product-grid" id="product-container">
+      <!-- Products will be displayed here dynamically -->
+    </div>
+
+        <div class="pagination" id="pagination"></div>
   </div>
-</div>
-
 </section>
+
 
     <!-- TESTIMONIALS -->
     <section id="testimonials" class="section testimonials">
@@ -344,8 +358,8 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="brand">Brick &amp; Batten</div>
-      <div class="copy">© <span id="year"></span> Brick &amp; Batten — Demo</div>
-      <div class="links"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+      <!-- <div class="copy">© <span id="year"></span> Brick &amp; Batten — Demo</div> -->
+      <!-- <div class="links"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div> -->
     </div>
   </footer>
 
