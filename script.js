@@ -25,6 +25,16 @@ const PRODUCTS = [
   { id: 18, title: "MODERN LED PENDANT LIGHT FIXTURE", price: 45955, image: "modern chandalier lkjjl.jpg", category:"Lighting"  },
   { id: 19, title: "CASCADING RING LED PENDANT CHANDALIER", price: 55000, image: "chandalier.webp", category:"Lighting"  },
   { id: 20, title: "MODERN OUTDOOR PATIO GARDEN RATTAN", price: 7500, image: "modernoutdoorpatiogardenRattan.jpg", category:"Lighting"  },
+  { id: 21, title: "ROBARDS HANDMADE OUTDOOR PLANTER", price: 7370, image: "Planter-Robards-Handmade-Black-AllModern_7974678abe.jpg", category:"Planters & Garden"  },
+  { id: 22, title: "PRO SERIES CURVE THIRY PLANTER", price: 35529, image: "Planter-Monstruousus-Planter-Model-Two-Black-DWR_79743fc20e.jpg", category:"Planters & Garden"  },
+  { id: 23, title: "CORTEN STEEL SERIES ROUND BOWN PLANTER", price: 9770, image: "Planter-Corten-Steel-Series-Round-Bowl-AllModern_79736ffd74.jpg", category:"Planters & Garden"  },
+  { id: 24, title: "CORTEN STEEL SEREIES SQUARE BOWL PLANTER", price: 17930, image: "Planter-Corten-Steel-Series-Square-Bowl-AllModern.jpg", category:"Planters & Garden"  },
+  { id: 25, title: "GITA HANDMADE OUTDOOR PLANTER BOX", price: 19540, image: "https://res.cloudinary.com/brickandbatten/images/c_scale,w_300,h_300,dpr_1.25/f_auto,q_auto/v1688091102/wordpress_assets/Planter-19in-Gita-Handmade-Box-Black-AllModern_82294c0e3a/Planter-19in-Gita-Handmade-Box-Black-AllModern_82294c0e3a.png?_i=AA", category:"Planters & Garden"  },
+  { id: 26, title: "BULLET PLANTER", price: 19980, image: "bullet planter.jpg", category:"Planters & Garden"  },
+  { id: 27, title: "MONSTRUOUS PLANTER MODEL TWO", price: 21756, image: "https://www.jdoqocy.com/click-100744692-14380396?url=https%3A%2F%2Fwww.dwr.com%2Faccessories-outdoor-planters-pots%2Fmonstruosus-planter-model-two%2F100269025.html%3Flang%3Den_US", category:"Planters & Garden"  },
+  { id: 28, title: "KNOX 20 PLANTER", price: 3285, image: "Planter-20in-Knox-Corten-DWR_8231924c9d.png", category:"Planters & Garden"  },
+  { id: 29, title: "SIGNATURE STONE HANGING PLANTER", price: 3374, image: "https://shareasale.com/m-pr.cfm?merchantid=122180&userid=3462047&productid=1253476990&afftrack=", category:"Planters & Garden"  },
+
 ];
 
 /* ===== Cart (persisted) ===== */
