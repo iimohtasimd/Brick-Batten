@@ -231,7 +231,7 @@ document.getElementById('sort').addEventListener('change', () => {
   currentPage = 1;
   renderProducts(category, sort, currentPage);
 });
-s
+
 
    // Cart open/close
   $('#openCartBtn')?.addEventListener('click', ()=>{

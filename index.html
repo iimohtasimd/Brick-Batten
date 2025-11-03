@@ -368,22 +368,25 @@
 
   <!-- CART DRAWER -->
   <aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
-    <div class="cart-header">
-      <h3>Your Cart</h3>
-      <button id="closeCartBtn" class="icon-btn" aria-label="Close cart">✕</button>
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button id="closeCartBtn" class="icon-btn" aria-label="Close cart">✕</button>
+  </div>
+
+  <div id="cartItems" class="cart-items"></div>
+
+  <!-- ✅ ADD THIS CART FOOTER -->
+  <div class="cart-footer">
+    <div class="cart-summary">
+      <span>Subtotal:</span>
+      <span id="cartSubtotal">₹0</span>
     </div>
-    <div id="cartItems" class="cart-items"></div>
-    <div class="cart-footer">
-      <div class="cart-summary">
-        <div>Subtotal</div>
-        <div id="cartSubtotal">₹0</div>
-      </div>
-      <div class="cart-actions">
-        <button id="payNowBtn" class="btn success">Pay Now</button>
-        <button id="clearCartBtn" class="btn ghost">Clear</button>
-      </div>
+    <div class="cart-actions">
+      <button id="payNowBtn" class="btn success">Pay Now</button>
     </div>
-  </aside>
+  </div>
+</aside>
+
   <div id="cartBackdrop" class="cart-backdrop" hidden></div>
 
   <script src="script.js"></script>
