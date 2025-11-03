@@ -5,26 +5,26 @@ const formatINR = n => '₹' + n.toLocaleString('en-IN');
 
 /* ===== Product catalog (12 items) - prices in INR ===== */
 const PRODUCTS = [
-  { id: 1, title: "MATTE BLACK CENTURY EXTERIOR LEVER WITH DEADBOLT ENTRY SET", price: 2436, image: "first.jpeg",category:"accessories" },
-  { id: 2, title: "AGED BRONZE MISSION DOOR", price: 6636, image: "second.jpeg",category:"accessories" },
-  { id: 3, title: "Modern AVALOON DOOR KNOCKER", price: 12516, image: "third.jpeg" },
-  { id: 4, title: "ACORN SMOOTH S SHUTTER HOLDBACK", price: 3276, image: "fouth.jpeg" },
-  { id: 5, title: "NEUTRA HOUSE NUMBER", price: 9144, image: "5th.jpeg" },
+  { id: 1, title: "MATTE BLACK CENTURY EXTERIOR LEVER WITH DEADBOLT ENTRY SET", price: 2436, image: "first.jpeg",category:"Accessories & Decor" },
+  { id: 2, title: "AGED BRONZE MISSION DOOR", price: 6636, image: "second.jpeg",category:"Accessories & Decor" },
+  { id: 3, title: "Modern AVALOON DOOR KNOCKER", price: 12516, image: "third.jpeg",category:"Accessories & Decor" },
+  { id: 4, title: "ACORN SMOOTH S SHUTTER HOLDBACK", price: 3276, image: "fouth.jpeg",category:"Accessories & Decor" },
+  { id: 5, title: "NEUTRA HOUSE NUMBER", price: 9144, image: "5th.jpeg",category:"Accessories & Decor" },
   { id: 6, title: "WELCOME HOME YARD SIGN", price: 2100, image: "sixth.jpeg",category:"planters" },
-  { id: 7, title: "MALONE POST-MOUNTED MAILBOX OPTIONAL POLE", price: 7476, image: "seventh.jpeg" },
-  { id: 8, title: "CUBBY WALL-MOUNTED MAILBOX", price: 1596, image: "8th.jpeg" },
+  { id: 7, title: "MALONE POST-MOUNTED MAILBOX OPTIONAL POLE", price: 7476, image: "seventh.jpeg",category:"Accessories & Decor" },
+  { id: 8, title: "CUBBY WALL-MOUNTED MAILBOX", price: 1596, image: "8th.jpeg",category:"Accessories & Decor" },
   { id: 9, title: "MODERN OBELISK MEDIUM SCONCE", price: 8320, image: "9th.jpeg",category:"lighting" },
-  { id: 10, title: "LAKEIEW ELYSIAN 36-INCH ROUND PROPANE FIRE TABLE", price: 2800, image: "10th.png" },
+  { id: 10, title: "LAKEIEW ELYSIAN 36-INCH ROUND PROPANE FIRE TABLE", price: 2800, image: "10th.png", category:"Planters & Garden" },
   { id: 11, title: "HULA SIDE TABLE", price: 6200, image: "11th.jpeg",category:"leisure" },
-  { id: 12, title: "HANGING RATTAN BENCH", price: 5200, image: "12th.png" },
-  { id: 13, title: "PVC CELLING PANEL PIECE", price: 120, image: "13th.jpg" },
-  { id: 14, title: "VOX PVC CELLING", price: 300, image: "14th.webp" },
-  { id: 15, title: "CORRUGATED ROOFING SHEET/PIECE", price: 500, image: "15th.webp" },
-  { id: 16, title: "SATINWOOD D5 CLAPBOARD/SQUARE FOOT", price: 1140, image: "16th.webp" },
-  { id: 17, title: "BROWN RATTAN GARDEN SWING BENCH", price: 8000, image: "17th.webp" },
-  { id: 18, title: "MODERN LED PENDANT LIGHT FIXTURE", price: 45955, image: "modern chandalier lkjjl.jpg" },
-  { id: 19, title: "CASCADING RING LED PENDANT CHANDALIER", price: 55000, image: "chandalier.webp" },
-  { id: 20, title: "MODERN OUTDOOR PATIO GARDEN RATTAN", price: 7500, image: "modernoutdoorpatiogardenRattan.jpg" },
+  { id: 12, title: "HANGING RATTAN BENCH", price: 5200, image: "12th.png", category:"Leisure" },
+  { id: 13, title: "PVC CELLING PANEL PIECE", price: 120, image: "13th.jpg", category:"Leisure" },
+  { id: 14, title: "VOX PVC CELLING", price: 300, image: "14th.webp",category:"Accessories & Decor" },
+  { id: 15, title: "CORRUGATED ROOFING SHEET/PIECE", price: 500, image: "15th.webp",category:"Accessories & Decor" },
+  { id: 16, title: "SATINWOOD D5 CLAPBOARD/SQUARE FOOT", price: 1140, image: "16th.webp",category:"Accessories & Decor" },
+  { id: 17, title: "BROWN RATTAN GARDEN SWING BENCH", price: 8000, image: "17th.webp",category:"Leisure"  },
+  { id: 18, title: "MODERN LED PENDANT LIGHT FIXTURE", price: 45955, image: "modern chandalier lkjjl.jpg", category:"Lighting"  },
+  { id: 19, title: "CASCADING RING LED PENDANT CHANDALIER", price: 55000, image: "chandalier.webp", category:"Lighting"  },
+  { id: 20, title: "MODERN OUTDOOR PATIO GARDEN RATTAN", price: 7500, image: "modernoutdoorpatiogardenRattan.jpg", category:"Lighting"  },
 ];
 
 /* ===== Cart (persisted) ===== */
@@ -44,13 +44,14 @@ function renderProducts(filter = "all", sort = "default", page = 1) {
   let items = [...PRODUCTS];
 
   // Filter
-  if (filter !== "all") items = items.filter(p => p.category === filter);
+ if (filter !== "all") items = items.filter(p => (p.category || '').toLowerCase() === (filter || '').toLowerCase());
 
   // Sort
   if (sort === "low-high") items.sort((a, b) => a.price - b.price);
   else if (sort === "high-low") items.sort((a, b) => b.price - a.price);
   else if (sort === "az") items.sort((a, b) => a.title.localeCompare(b.title));
   else if (sort === "za") items.sort((a, b) => b.title.localeCompare(a.title));
+
 
   // Pagination
  const start = (page - 1) * PRODUCTS_PER_PAGE;
@@ -204,22 +205,23 @@ document.addEventListener('DOMContentLoaded', ()=>{
 renderProducts(); renderCart(); updateCartCount();
 
 // Category Filter
-  $$('input[name="category"]').forEach(radio=>{
-    radio.addEventListener('change',()=>{
-      const category = $('input[name="category"]:checked').value;
-      const sort = $('#sort').value;
-      currentPage=1;
-      renderProducts(category, sort, currentPage);
-    });
+$$('input[name="category"]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    const category = document.querySelector('input[name="category"]:checked').value;
+    const sort = document.getElementById('sort').value;
+    currentPage = 1;
+    renderProducts(category, sort, currentPage);
   });
+});
 
-
-   // Sorting
-  $('#sort').addEventListener('change',()=>{
-    const category = $('input[name="category"]:checked').value;
-    const sort = $('#sort').value;
-    renderProducts(category, sort);
-  });
+// Sorting dropdown
+document.getElementById('sort').addEventListener('change', () => {
+  const category = document.querySelector('input[name="category"]:checked').value;
+  const sort = document.getElementById('sort').value;
+  currentPage = 1;
+  renderProducts(category, sort, currentPage);
+});
+s
 
    // Cart open/close
   $('#openCartBtn')?.addEventListener('click', ()=>{
